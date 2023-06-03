@@ -21,9 +21,16 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 //Este componente recebe un objeto con 3 arrays que definen los colores
 //de las caras superior (up), izquierda (left), derecha (right)
-defineProps({
-    image: Object
-})
+
+const image = ref({
+    up: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    left: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    right: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+});
+
+const changeColor = () => {
+    image.value.up[1]++;
+}
 
 //Método que retorna las clases correspondientes al color de la pieza
 const color = (element) => {
