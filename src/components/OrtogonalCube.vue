@@ -2,15 +2,19 @@
     <div class="ortogonal-cube">
         <div ref="cube" class="ortogonal-cube__cube">
             <div class="ortogonal-cube__face ortogonal-cube__face--up">
-                <div v-for="piece in image.up" class="ortogonal-cube__piece" :class="color(piece)">
+                <div v-for="piece, index in image.up" @click="changeColorUp(index)" class="ortogonal-cube__piece"
+                    :class="color(piece)">
                 </div>
             </div>
             <div class="ortogonal-cube__face ortogonal-cube__face--left">
-                <div v-for="piece in image.left" class="ortogonal-cube__piece" :class="color(piece)">
+                <div v-for="piece, index in image.left" @click="changeColorLeft(index)" class="ortogonal-cube__piece"
+                    :class="color(piece)">
                 </div>
             </div>
             <div class="ortogonal-cube__face ortogonal-cube__face--right">
-                <div v-for="piece in image.right" class="ortogonal-cube__piece" :class="color(piece)"></div>
+                <div v-for="piece, index in image.right" @click="changeColorRight(index)" class="ortogonal-cube__piece"
+                    :class="color(piece)">
+                </div>
             </div>
         </div>
     </div>
@@ -28,8 +32,28 @@ const image = ref({
     right: [0, 0, 0, 0, 0, 0, 0, 0, 0]
 });
 
-const changeColor = () => {
-    image.value.up[1]++;
+const changeColorUp = (index) => {
+    if (image.value.up[index] < 6) {
+        image.value.up[index]++;
+    } else {
+        image.value.up[index] = 0;
+    }
+}
+
+const changeColorLeft = (index) => {
+    if (image.value.left[index] < 6) {
+        image.value.left[index]++;
+    } else {
+        image.value.left[index] = 0;
+    }
+}
+
+const changeColorRight = (index) => {
+    if (image.value.right[index] < 6) {
+        image.value.right[index]++;
+    } else {
+        image.value.right[index] = 0;
+    }
 }
 
 //Método que retorna las clases correspondientes al color de la pieza
